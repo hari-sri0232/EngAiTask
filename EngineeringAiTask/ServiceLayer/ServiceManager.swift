@@ -15,6 +15,7 @@ class ServiceManager {
         let shared = ServiceManager()
         return shared
     }()
+    //Initialize Urlsession
     func getUrlSession() -> URLSession {
         let configuration = URLSessionConfiguration.default
         configuration.allowsCellularAccess = true
@@ -23,6 +24,7 @@ class ServiceManager {
         let session = URLSession(configuration: configuration)
         return session
     }
+    //Fetch data from server
     func makeServerRequest(with baseUrl: String?, parameters: [String:Any]?, completionHandler:@escaping([String:Any]?, StatusMessage?)->Void) {
         guard let url = URL(string: baseUrl ?? "") else { return  }
         var urlRequest = URLRequest(url: url)

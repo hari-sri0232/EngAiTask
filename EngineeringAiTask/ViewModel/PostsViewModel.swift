@@ -23,7 +23,7 @@ class PostsViewModel {
     var delegate:ReloadDelegate?
     var selectionDelegate:SelectionDelegate?
     var rows = 0
-    
+    //Fetch Posts
     func fetchPosts(baseUrl: String?, offset:Int?, parametres: [String:Any]?, completionHandler:([String:Any]?, StatusMessage?)->()) {
         serviceManger?.makeServerRequest(with: baseUrl, parameters: parametres, completionHandler: { (response, statusMsg) in
             switch statusMsg {
@@ -56,6 +56,7 @@ class PostsViewModel {
 
         })
     }
+    //Fetch Selected Posts
     func didSelectPost(with indexPath: IndexPath) {
         var post = self.posts[indexPath.row]
         if post.postSelected == true {

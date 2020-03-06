@@ -57,7 +57,6 @@ class PostsViewController: UIViewController {
             currentPage += 1
             let baseUrl = "https://hn.algolia.com/api/v1/search_by_date?tags=story&page=\(offset)"
             postViewModel.fetchPosts(baseUrl: baseUrl, offset: offset, parametres: [:]) { (response, status) in
-                
             }
         }else {
             Helper.showAlert(title: "No Internet Connection..", message: "")
@@ -76,6 +75,7 @@ class PostsViewController: UIViewController {
         }
     }
 }
+//MARK: Uitableview methods
 extension PostsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if postViewModel.rows > 0 {
@@ -104,9 +104,9 @@ extension PostsViewController: UITableViewDelegate, UITableViewDataSource {
         }else {
             hideORUnhideActivity(baseView: self.view, postion: .bottom, isHide: true)
         }
-        
     }
 }
+//MARK: Reload Table if data is available
 extension PostsViewController: ReloadDelegate {
     func getTotalPagesCount(count: Int) {
         self.totalPages = count
@@ -125,6 +125,7 @@ extension PostsViewController: ReloadDelegate {
         }
     }
 }
+//MARK: Get toggle status
 extension PostsViewController: SelectionDelegate {
     func getSelectedPosts(count: Int?, indexPath: IndexPath) {
         DispatchQueue.main.async {
@@ -133,6 +134,7 @@ extension PostsViewController: SelectionDelegate {
         }
     }
 }
+//MARK: Network Changes
 extension PostsViewController: NetworkDelegate {
     func respondsToNetworkChages(isActive: Bool) {
         if isActive {
